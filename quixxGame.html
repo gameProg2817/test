@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<head>
+	<title>Synthése</title>
+	<!--<link rel="stylesheet" type="text/css" href="supportCSS" />-->
+	<!--<script type="text/javascript" src="supportJS"></script>-->
+	<style>
+		
+		body {background-color: black;}
+#grid {
+	background-color: grey;
+	border-radius: 6px;
+	width: 60%;
+	text-align: center;
+	margin: auto;
+	border: 5px solid white;
+}
+#line1 , #line2 , #line3 , #line4 , #line5 , #line5 > #droite , #line6 , #ResultatDes {
+	display: flex;
+	justify-content: center;
+}
+#line1 > p , #line2 > p , #line3 > p, #line4 > p , #line5 > #penalites , #line5 > #droite > p , #line6 > p , #ResultatDes > p {
+	margin: 10px;
+	padding: 10px;
+	color: white;
+	border-radius: 6px;
+}
+#line1 > p , #line2 > p , #line3 > p, #line4 > p {
+	flex-grow: 0.83;
+}
+#line5 > #penalites , #line5 > #droite {
+	flex-grow: 0.50;
+}
+#line5 > #droite > p  {
+	flex-grow: 0.25;
+}
+#line6 > p {
+	flex-grow: 1.66;
+}
+#line1 > p {
+	background-color: rgba(255, 0, 0, 0.6);;
+	border: 2px solid red;
+}
+#line2 > p {
+	background-color: rgba(255,255,0,0.3);
+	border: 2px solid yellow;
+}
+#line3 > p {
+	background-color: rgba(0,255,0,0.3);
+	border: 2px solid green;
+}
+#line4 > p {
+	background-color: rgba(0,0,255,0.3);
+	border: 2px solid blue;
+}
+#line5 > #penalites {
+	background-color: white;
+	border: 2px solid black;
+	color: black;		
+}
+#line5 > #droite > p {
+	background-color: rgb(180, 180, 180);
+	border: 2px solid black;	
+}
+#line6 > p {
+	background-color: white;
+	border: 2px solid black;
+	color: red;
+}
+#ResultatDes > p {
+ 	flex-grow: 1;
+ 	background-color: #7FFFD4;
+	border: 2px solid red;
+	color: black;
+ }
+	</style>
+</head>
+
+<html>
+	<div id="grid">
+
+		<div id="line1">
+			<p id="r0">2</p>
+			<p id="r1">3</p>
+			<p id="r2">4</p>
+			<p id="r3">5</p>
+			<p id="r4">6</p>
+			<p id="r5">7</p>
+			<p id="r6">8</p>
+			<p id="r7">9</p>
+			<p id="r8">10</p>
+			<p id="r9">11</p>
+			<p id="r10">12</p>
+			<p id="r11">X</p>
+		</div>
+		<div id="line2">
+			<p id="y0">2</p>
+			<p id="y1">3</p>
+			<p id="y2">4</p>
+			<p id="y3">5</p>
+			<p id="y4">6</p>
+			<p id="y5">7</p>
+			<p id="y6">8</p>
+			<p id="y7">9</p>
+			<p id="y8">10</p>
+			<p id="y9">11</p>
+			<p id="y10">12</p>
+			<p id="y11">X</p>
+		</div>
+		<div id="line3">
+			<p id="g0">12</p>
+			<p id="g1">11</p>
+			<p id="g2">10</p>
+			<p id="g3">9</p>
+			<p id="g4">8</p>
+			<p id="g5">7</p>
+			<p id="g6">6</p>
+			<p id="g7">5</p>
+			<p id="g8">4</p>
+			<p id="g9">3</p>
+			<p id="g10">2</p>
+			<p id="g11">X</p>
+		</div>
+		<div id="line4">
+			<p id="b0">12</p>
+			<p id="b1">11</p>
+			<p id="b2">10</p>
+			<p id="b3">9</p>
+			<p id="b4">8</p>
+			<p id="b5">7</p>
+			<p id="b6">6</p>
+			<p id="b7">5</p>
+			<p id="b8">4</p>
+			<p id="b9">3</p>
+			<p id="b10">2</p>
+			<p id="b11">X</p>
+		</div>
+		<div id="line5">
+			<p id="penalites">Penalités</p>
+			<div id="droite">
+				<p id="p1" style="border: 3px solid red;">0</p>
+				<p id="p2" style="border: 3px solid yellow;">0</p>
+				<p id="p3"  style="border: 3px solid green;">0</p>
+				<p id="p4"  style="border: 3px solid blue;">0</p>
+			</div>
+		</div>
+		<div id="line6">
+			<p id="res0">0</p>
+			<p id="res1">0</p>
+			<p id="res2">0</p>
+			<p id="res3">0</p>
+			<p id="res4">0</p>
+			<p id="res5">0</p>
+		</div>
+		<div id="ResultatDes">
+			<p id="message">Vous avez jété le dès"</p>
+		</div>
+	</div>
+</html>
+
+<script>
+
+
+function IdClickFull(IdAll) {
+	var tab = ["r","y","g","b"];
+	for(var i = 0; i < tab.length ; i++){
+		for(var j = 0 ; j <= 10 ; j++ ) {
+			IdAll.push(tab[i]+j);
+		}
+	}
+	setClick(IdAll);
+}
+
+function removeIdLeft (IdAll,id) {
+	var debut;
+	if(id[0]=="r") debut=0;
+	if(id[0]=="y") debut=11;
+	if(id[0]=="g") debut=22;
+	if(id[0]=="b") debut=23;
+	for(var i = debut; i <= parseInt(id[1]) ; i++ ){
+		IdAll.splace(i);
+	}
+}
+
+function setClick (IdAll) {
+	for ( var i = 0 ; i < IdAll.length ; i++) {
+		addClickOne(IdAll[i]);
+	}
+} 
+
+function addClickOne(identifiant) {
+	document.getElementById(identifiant).addEventListener("click", function() {
+		document.getElementById(identifiant).style.border = " 2px solid black ";
+		document.getElementById(identifiant).style.color = " black ";
+		document.getElementById(identifiant).style.backgroundColor = " #ff6347 ";
+	});
+}
+
+function main () {
+	IdAll = [] ;
+	IdClickFull(IdAll);
+}
+main();
+
+
+</script>
